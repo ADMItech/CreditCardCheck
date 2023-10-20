@@ -32,9 +32,21 @@ if __name__ == "__main__":
     # Data to send
     # Open browser inspector
     data = {
-
+        "no": CARD_NUMBER,
+        "expm": EXP_MONTH,
+        "expy": EXP_YEAR,
+        "cvv": CVV
     }
+
+    threads = []
 
     for i in range(70):
         t = threading.Thread(target=do_attack)
         t.daemon = True
+        threads.append(t)
+
+    for i in range(50):
+        threads[i].start()
+
+    for i in range(50):
+        threads[i].join()
